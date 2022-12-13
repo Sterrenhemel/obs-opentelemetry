@@ -46,6 +46,7 @@ type Config struct {
 	textMapPropagator propagation.TextMapPropagator
 
 	recordSourceOperation bool
+	enableSentry          bool
 }
 
 func newConfig(opts []Option) *Config {
@@ -80,6 +81,12 @@ func defaultConfig() *Config {
 func WithRecordSourceOperation(recordSourceOperation bool) Option {
 	return option(func(cfg *Config) {
 		cfg.recordSourceOperation = recordSourceOperation
+	})
+}
+
+func WithSentry(enableSentry bool) Option {
+	return option(func(cfg *Config) {
+		cfg.enableSentry = enableSentry
 	})
 }
 

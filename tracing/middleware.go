@@ -16,6 +16,7 @@ package tracing
 
 import (
 	"context"
+	"github.com/getsentry/sentry-go"
 	"time"
 
 	"github.com/cloudwego/hertz/pkg/app"
@@ -99,6 +100,18 @@ func ClientMiddleware(opts ...Option) client.Middleware {
 
 func ServerMiddleware(cfg *Config) app.HandlerFunc {
 	return func(ctx context.Context, c *app.RequestContext) {
+
+		if cfg.enableSentry {
+			hub := sentry.CurrentHub().Clone()
+			req, err := adaptor.GetCompatRequest(&c.Request)
+			if err != nil {
+				hlog.CtxErrorf(ctx, "GetCompatRequest err:%v", err)
+				c.Next(ctx)
+				return
+			}
+			hub.Scope().SetRequest(req)
+		}
+
 		// get tracer carrier
 		tc := internal.TraceCarrierFromContext(ctx)
 		if tc == nil {

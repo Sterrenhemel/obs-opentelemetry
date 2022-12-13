@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/bytedance/gopkg v0.0.0-20220623074550-9d6d3df70991
 	github.com/cloudwego/hertz v0.4.1
+	github.com/getsentry/sentry-go v0.16.0
 	github.com/stretchr/testify v1.8.0
 	go.opentelemetry.io/contrib/propagators/b3 v1.9.0
 	go.opentelemetry.io/contrib/propagators/ot v1.9.0
@@ -36,7 +37,8 @@ require (
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
-	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
+	golang.org/x/text v0.3.7 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
