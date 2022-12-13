@@ -16,6 +16,7 @@ package tracing
 
 import (
 	"context"
+	"fmt"
 	"github.com/getsentry/sentry-go"
 	"time"
 
@@ -110,6 +111,16 @@ func ServerMiddleware(cfg *Config) app.HandlerFunc {
 				return
 			}
 			hub.Scope().SetRequest(req)
+			options := []sentry.SpanOption{
+				sentry.OpName("http.server"),
+				sentry.ContinueFromRequest(req),
+				sentry.TransctionSource(sentry.SourceURL),
+			}
+			transaction := sentry.StartTransaction(ctx,
+				fmt.Sprintf("%s %s", req.Method, req.URL.Path),
+				options...,
+			)
+			defer transaction.Finish()
 		}
 
 		// get tracer carrier
