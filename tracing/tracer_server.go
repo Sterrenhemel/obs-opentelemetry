@@ -52,7 +52,7 @@ func NewServerTracer(opts ...Option) (serverconfig.Option, *Config) {
 }
 
 func (s *serverTracer) createMeasures() {
-	serverLatencyMeasure, err := s.config.meter.SyncFloat64().Histogram(ServerLatency)
+	serverLatencyMeasure, err := s.config.meter.Float64Histogram(ServerLatency)
 	handleErr(err)
 
 	s.histogramRecorder[ServerLatency] = serverLatencyMeasure
