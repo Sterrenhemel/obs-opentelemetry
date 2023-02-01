@@ -47,7 +47,7 @@ func ClientMiddleware(opts ...Option) client.Middleware {
 	cfg := newConfig(opts)
 	histogramRecorder := make(map[string]syncfloat64.Histogram)
 
-	clientLatencyMeasure, err := cfg.meter.SyncFloat64().Histogram(ClientLatency)
+	clientLatencyMeasure, err := cfg.meter.Float64Histogram(ClientLatency)
 	handleErr(err)
 
 	histogramRecorder[ClientLatency] = clientLatencyMeasure
