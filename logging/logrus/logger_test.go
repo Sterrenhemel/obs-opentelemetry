@@ -19,11 +19,12 @@ import (
 	"testing"
 
 	"github.com/cloudwego/hertz/pkg/common/hlog"
-	otelhertzlogrus "github.com/hertz-contrib/obs-opentelemetry/logging/logrus"
 	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+
+	otelhertzlogrus "github.com/hertz-contrib/obs-opentelemetry/logging/logrus"
 )
 
 func stdoutProvider(ctx context.Context) func() {

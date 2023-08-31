@@ -17,7 +17,6 @@ package tracing
 import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/metric/global"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -72,7 +71,7 @@ func newConfig(opts []Option) *Config {
 func defaultConfig() *Config {
 	return &Config{
 		tracerProvider:    otel.GetTracerProvider(),
-		meterProvider:     global.MeterProvider(),
+		meterProvider:     otel.GetMeterProvider(),
 		textMapPropagator: otel.GetTextMapPropagator(),
 	}
 }
