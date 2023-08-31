@@ -158,5 +158,12 @@ func ServerMiddleware(cfg *Config) app.HandlerFunc {
 		tc.SetSpan(span)
 
 		c.Next(ctx)
+
+		// add trace-id on response header
+		addTrace(c, span)
 	}
+}
+
+func addTrace(c *app.RequestContext, span oteltrace.Span) {
+	c.Response.Header.Add("trace-id", span.SpanContext().TraceID().String())
 }
