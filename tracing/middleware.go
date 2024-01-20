@@ -113,9 +113,9 @@ func ServerMiddleware(cfg *Config) app.HandlerFunc {
 			}
 			hub.Scope().SetRequest(req)
 			options := []sentry.SpanOption{
-				sentry.OpName("http.server"),
+				sentry.WithOpName("http.server"),
 				sentry.ContinueFromRequest(req),
-				sentry.TransctionSource(sentry.SourceURL),
+				sentry.WithTransactionSource(sentry.SourceURL),
 			}
 			transaction := sentry.StartTransaction(ctx,
 				fmt.Sprintf("%s %s", req.Method, req.URL.Path),
